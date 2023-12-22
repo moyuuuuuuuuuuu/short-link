@@ -3,10 +3,13 @@
 namespace app\common\model;
 
 use app\exception\SystemException;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use support\Model;
 
 class Short extends Model
 {
+    use SoftDeletes;
+
     /**
      * 默认过期时间
      */
@@ -27,6 +30,11 @@ class Short extends Model
     const HOTNESS_DECAY_NUM = 0.1;
 
     /**
+     * 每访问一次增加热度数
+     */
+    const HOTNESS_INC_NUM = 0.2;
+
+    /**
      * 状态：正常
      */
     const NORMAL = 1;
@@ -43,7 +51,7 @@ class Short extends Model
     {
         $code = base_convert(abs(crc32($link)), 10, 36); // 获取编码后的前6位作为短链接
         $num  = 0;
-        while (self::count(['code' => $code, 'status' => self::NORMAL]) > 0 && $num < self::REGENERATE_CODE_MAX_NUM) {
+        while (self::where(['code' => $code, 'status' => self::NORMAL])->count() > 0 && $num < self::REGENERATE_CODE_MAX_NUM) {
             $code = base_convert(abs(crc32($link)), 10, 36); // 获取编码后的前6位作为短链接
             $num++;
         }
@@ -59,9 +67,10 @@ class Short extends Model
             throw new SystemException('链接不能为空');
         }
 
-        #检测链接是否合法
+
         if (!filter_var($link, FILTER_VALIDATE_URL)) {
             throw new SystemException('链接不合法');
         }
+        #TODO: 违规站点检测
     }
 }
