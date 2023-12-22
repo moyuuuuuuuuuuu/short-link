@@ -22,6 +22,7 @@ class ActionHook implements MiddlewareInterface
                 return $reponse instanceof Response ? $reponse : \response($reponse);
             }
             $controller = Container::get($request->controller);
+            var_dump(method_exists($controller, 'beforeAction'),method_exists($controller, 'afterAction'));
             if (method_exists($controller, 'beforeAction')) {
                 $before_response = call_user_func([$controller, 'beforeAction'], $request);
                 if ($before_response instanceof Response) {

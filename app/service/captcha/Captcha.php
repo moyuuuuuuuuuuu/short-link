@@ -2,17 +2,20 @@
 
 namespace app\service\captcha;
 
-use support\Request;
+use Webman\Http\Request;
 
 abstract class Captcha
 {
     protected $request = null;
 
-    protected $config = [];
+    protected $config = [
+        'ttl' => 180
+    ];
 
-    public function __construct(Request $request)
+    public function __construct(Request $request, array $config = [])
     {
         $this->request = $request;
+        $this->config  = array_merge($this->config, $config);
     }
 
 
@@ -23,5 +26,5 @@ abstract class Captcha
 
     abstract public function render();
 
-    abstract public function check($code);
+    abstract public function check($captcha);
 }

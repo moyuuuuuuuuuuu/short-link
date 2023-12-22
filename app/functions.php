@@ -24,3 +24,19 @@ function reconvert($str)
     }, $str);
     return $str;
 }
+
+/**
+ * 生成颜色值
+ * @return string
+ */
+function randomHexColor($hasNotation = false)
+{
+    $color = '';
+    if ($hasNotation) {
+        $color = '#';
+    }
+    for ($i = 0; $i < 6; $i++) {
+        $color .= dechex(rand(0, 15));
+    }
+    return $color;
+}

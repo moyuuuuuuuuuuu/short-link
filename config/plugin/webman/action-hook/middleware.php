@@ -12,9 +12,10 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+use Webman\ActionHook\ActionHook;
+
 return [
     '' => [
-        \app\middleware\XRequestId::class,
-        \app\middleware\Authorization::class
+        ActionHook::class
     ]
 ];

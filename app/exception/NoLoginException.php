@@ -2,7 +2,7 @@
 
 namespace app\exception;
 
-class NoLoginException extends \RuntimeException
+class NoLoginException extends SystemException
 {
     public function __construct($message = "", $code = 4001, \Throwable $previous = null)
     {

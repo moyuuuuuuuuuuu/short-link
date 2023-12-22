@@ -23,7 +23,7 @@ return [
             'host'        => getenv('MYSQL_HOST', '127.0.0.1'),
             'port'        => getenv('MYSQL_PORT', '3306'),
             'database'    => getenv('MYSQL_DATABASE', ''),
-            'username'    => getenv('MYSQL_USERNAME', 'root'),
+            'username'    => getenv('MYSQL_USER', 'root'),
             'password'    => getenv('MYSQL_PASSWORD', '123456'),
             'unix_socket' => '',
             'charset'     => getenv('MYSQL_CHARSET', 'utf8'),

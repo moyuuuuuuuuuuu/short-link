@@ -2,7 +2,7 @@
 
 namespace app\common\controller;
 
-use support\{Request, Response};
+use  Webman\Http\{Request, Response};
 
 class Base
 {

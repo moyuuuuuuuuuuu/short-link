@@ -2,7 +2,7 @@
 
 namespace app\exception;
 
-class ValidTokenException extends \RuntimeException
+class ValidTokenException extends SystemException
 {
     public function __construct($message = "", $code = 4002, \Throwable $previous = null)
     {
